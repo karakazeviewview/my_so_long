@@ -1,4 +1,4 @@
 test.
 add.
-functionA();
+functionB();
 OK;
