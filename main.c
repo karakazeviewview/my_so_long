@@ -2,6 +2,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <mlx.h>
+#include <stdbool.h>
+#define KEY_UP 13
+#define KEY_LEFT 0
+#define KEY_DOWN 1
+#define KEY_RIGHT 2
 
 struct IMG
 {
@@ -17,6 +22,9 @@ struct s_game
 	char **map;
 	int player_x;
 	int player_y;
+	int floor_x;
+	int floor_y;
+	int key_code;
 	void *mlx_ptr;
 	void *win_ptr;
 	size_t collect_count;
@@ -68,8 +76,6 @@ void display_grid(void *mlx_ptr, void *win_ptr, struct IMG img, int x, int y, ch
 		mlx_put_image_to_window(mlx_ptr, win_ptr, img.wall_img, x, y);
 	if (tile == '0')
 		mlx_put_image_to_window(mlx_ptr, win_ptr, img.floor_img, x, y);
-	if (tile == 'P')
-		mlx_put_image_to_window(mlx_ptr, win_ptr, img.player_img, x, y);
 	if (tile == 'C')
 		mlx_put_image_to_window(mlx_ptr, win_ptr, img.collection_img, x, y);
 	if (tile == 'E')
@@ -94,18 +100,85 @@ void display_img(struct s_game *game)
 	}
 }
 
+void display_player(struct s_game *game)
+{
+	int x;
+	int y;
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.player_img  , game->player_x * 59, game->player_y * 59);
+
+}
+
+void display_floor(struct s_game *game)
+{
+	int x;
+	int y;
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.floor_img, game->player_x, game->player_y);
+}
+
+bool check_collision(struct s_game *game, int player_next_y, int player_next_x)
+{
+
+	if (game->map[player_next_y][player_next_x] == '1')
+	{
+		return (true);
+	}
+	else
+	{
+		return (false);
+	}
+}
 
 int input_key(int key_code, struct s_game *game)
 {
 	printf("%d\n", key_code);
-	if (key_code == 13)
-		game->player_y = game->player_y - 1;
-	if (key_code == 0)
-		game->player_x = game->player_x - 1;
-	if (key_code == 1)
-		game->player_y = game->player_y + 1;
-	if (key_code == 2)
-		game->player_x = game->player_x + 1;
+	game->key_code = key_code;
+	display_floor(game);
+	printf("%d %d\n", game->player_x, game->player_y);
+	return (0);
+}
+
+int move_player(struct s_game *game)
+{
+	
+	if (game->key_code == KEY_UP)
+	{
+		if (check_collision(game, game->player_y - 1, game->player_x  ) == true)
+		{
+			return (0);
+		}
+			game->player_y = (game->player_y - 1)  ;
+	}
+	if (game->key_code == KEY_LEFT)
+	{
+		if (check_collision(game, game->player_y, game->player_x - 1) == true)
+		{
+			return (0);
+		}
+		else
+			game->player_x = (game->player_x - 1)  ;
+	}
+	if (game->key_code == KEY_DOWN)
+	{
+		if (check_collision(game, game->player_y + 1, game->player_x  ) == true)
+		{
+			return (0);
+		}
+		game->player_y = (game->player_y + 1)  ;
+	}
+	if (game->key_code == KEY_RIGHT)
+	{
+		//if (player_x + 1 == "wall")
+		if (check_collision(game, game->player_y, game->player_x + 1) == true)
+		{
+			return (0);
+		}
+		else
+		{
+			game->player_x = (game->player_x + 1)  ;
+		}
+	}
+	game->key_code = -1;
+	display_player(game);
 	printf("%d %d\n", game->player_x, game->player_y);
 	return (0);
 }
@@ -159,6 +232,8 @@ int main(int argc, char **argv)
 	init_game(game);
 	display_img(game);
 	mlx_key_hook(game->win_ptr, input_key, game);
+	mlx_loop_hook(game->mlx_ptr, move_player, game);
 	mlx_loop(game->mlx_ptr);
+	//nt mlx_loop_hook(void *mlx_ptr, int (*funct_ptr)(), void *param);
 	return (0);
 }
