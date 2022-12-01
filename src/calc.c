@@ -6,23 +6,32 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:57 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/11/27 21:11:02 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/11/28 16:44:06 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <string.h>
 
 void init_game(struct s_game *game)
 {
 	int bufx = 0;
 	int bufy = 0;
 
-	game->win_ptr = mlx_new_window(game->mlx_ptr, 500, 500, "mlx 42");
 	game->img.wall_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_WALL, &bufx, &bufy); 
 	game->img.floor_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_FLOOR, &bufx, &bufy);
 	game->img.player_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_PLAYER, &bufx, &bufy);
 	game->img.collection_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_COLLECTION, &bufx, &bufy);
 	game->img.exit_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_EXIT, &bufx, &bufy);
+	size_t i = 0;
+	while (game->map[i])
+		i++;
+	bufy *= i;	
+	i = 0;
+	while (game->map[0][i])
+		i++;
+	bufx *= i;
+	game->win_ptr = mlx_new_window(game->mlx_ptr, bufx, bufy, "mlx 42");
 }
 
 void exit_game(struct s_game *game)
@@ -60,6 +69,7 @@ char *mini_get_next_line(int fd)
     buffer[i] = '\0';
     return(buffer);
 }
+
 
 void check_map(struct s_game *game)
 {
