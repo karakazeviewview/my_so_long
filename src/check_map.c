@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 22:04:44 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/11/28 18:29:11 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/02 22:47:16 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ bool check_e(char **map)
 		}
 		y++;
 	}
-	if (e_count == 1)
+	if (e_count >= 1)
 		return (true);
 	else
 		return (false);
@@ -148,18 +148,61 @@ void err_exit(struct s_game *game, char *msg)
 	}
 	free(map);
 	free(game);
-	printf("Error\n");
-	printf("%s\n", msg);
+	ft_printf("Error\n");
+	ft_printf("%s\n", msg);
 	exit (0);
 }
 
-void check_if_rectangle()
-{}
+void check_if_rectangle(struct s_game *game)
+{
+    size_t    len;
+    size_t    i;
 
+    len = ft_strlen(game->map[0]);
+    i = 1;
+    while (game->map[i])
+    {
+        if (len != ft_strlen(game->map[i]))
+            error;
+        i++;
+    }
+}
+
+/*
 void check_map(struct s_game *game)
 {
 	if (!check_characters(game))
 	{
 		err_exit(game, "Invalid characters in map");
 	}
+}
+*/
+
+void check_map(struct s_game *game)
+{
+    size_t    i;
+    size_t    j;
+
+    i = 0;
+    while (game->map[i])
+    {
+        j = 0;
+        while (game->map[i][j])
+        {
+            if (!strchr("01PCE", game->map[i][j]))
+                error;
+            j++;
+        }
+    }
+}
+
+void que_add_back(struct s_node *ptr)
+{
+
+}
+
+
+struct s_node *que_take_front()
+{
+	return ();
 }
