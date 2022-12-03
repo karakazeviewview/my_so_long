@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:35 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/11/27 21:10:32 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/03 15:41:28 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void display_grid(void *mlx_ptr, void *win_ptr, struct IMG img, int x, int y, ch
 
 void display_img(struct s_game *game)
 {
-	int bufx = 0;
-	int bufy = 0;
 
 	int i = 0;
 	while (game->map[i] != NULL)
@@ -56,4 +54,3 @@ int display_player(struct s_game *game)
 	//printf("game->pox%d\n", game->player_old_x);
 	return (0);
 }
-

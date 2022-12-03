@@ -6,13 +6,14 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/11/27 21:10:49 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/03 15:34:15 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <mlx.h>
@@ -40,6 +41,8 @@ struct IMG
 struct s_game
 {
 	char **map;
+	int map_height;
+	int map_width;
 	int player_y;
 	int player_x;
 	int key_code;
@@ -51,6 +54,7 @@ struct s_game
 	struct IMG img;
 };
 
+void all_err_check(struct s_game *game);
 char *mini_get_next_line(int fd);
 char **input_map(char *file_name);
 void display_grid(void *mlx_ptr, void *win_ptr, struct IMG img, int x, int y, char tile);

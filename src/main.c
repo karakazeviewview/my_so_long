@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:59:29 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/11/27 21:11:20 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/03 16:11:28 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main(int argc, char **argv)
 	game->map = input_map(file_name);
 	game->key_code = -1;
 	check_map(game);
+	all_err_check(game);
 	init_game(game);
 	display_img(game);
 	mlx_key_hook(game->win_ptr, input_key, game);

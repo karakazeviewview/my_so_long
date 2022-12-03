@@ -6,47 +6,12 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:57 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/11/28 16:44:06 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/03 15:35:35 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <string.h>
-
-void init_game(struct s_game *game)
-{
-	int bufx = 0;
-	int bufy = 0;
-
-	game->img.wall_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_WALL, &bufx, &bufy); 
-	game->img.floor_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_FLOOR, &bufx, &bufy);
-	game->img.player_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_PLAYER, &bufx, &bufy);
-	game->img.collection_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_COLLECTION, &bufx, &bufy);
-	game->img.exit_img = mlx_xpm_file_to_image(game->mlx_ptr, IMG_EXIT, &bufx, &bufy);
-	size_t i = 0;
-	while (game->map[i])
-		i++;
-	bufy *= i;	
-	i = 0;
-	while (game->map[0][i])
-		i++;
-	bufx *= i;
-	game->win_ptr = mlx_new_window(game->mlx_ptr, bufx, bufy, "mlx 42");
-}
-
-void exit_game(struct s_game *game)
-{
-	mlx_destroy_image(game->mlx_ptr, game->img.wall_img);
-	mlx_destroy_image(game->mlx_ptr, game->img.floor_img);
-	mlx_destroy_image(game->mlx_ptr, game->img.player_img);
-	mlx_destroy_image(game->mlx_ptr, game->img.collection_img);
-	mlx_destroy_image(game->mlx_ptr, game->img.exit_img);
-	mlx_clear_window(game->mlx_ptr, game->win_ptr);
-	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	printf("hello\n");
-	free(game);
-	exit(0);
-}
 
 char *mini_get_next_line(int fd)
 {
@@ -68,36 +33,6 @@ char *mini_get_next_line(int fd)
     }
     buffer[i] = '\0';
     return(buffer);
-}
-
-
-void check_map(struct s_game *game)
-{
-	int i = 0;
-	int j;
-	char **map;
-
-	game->collect_count = 0;
-	map = game->map;
-	while (map[i] != NULL)
-	{
-		j = 0;
-		while (map[i][j] != '\0')
-		{
-			if (map[i][j] == 'P')
-			{
-				game->player_x = j;
-				game->player_y = i;
-			}
-			if (map[i][j] == 'C')
-			{
-				game->collect_count++;
-			}
-			j++;
-		}
-		i++;
-	}
-	printf("collect_count = %zu\n", game->collect_count);
 }
 
 bool check_collision(struct s_game *game, int player_next_y, int player_next_x)
