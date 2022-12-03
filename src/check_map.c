@@ -6,12 +6,11 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 22:04:44 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/03 16:11:13 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 01:20:16 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void check_map(struct s_game *game)
 {
@@ -39,45 +38,16 @@ void check_map(struct s_game *game)
 		}
 		i++;
 	}
-	printf("collect_count = %zu\n", game->collect_count);
 }
 
-bool check_characters(struct s_game *game)
+/*
+bool	check_wrong_character(struct s_game *game)
 {
-	int i = 0;
-	int j;
-	char **map;
-
-	game->collect_count = 0;
-	map = game->map;
-	while (map[i] != NULL)
-	{
-		j = 0;
-		while (map[i][j] != '\0')
-		{
-			if (map[i][j] == 'P')
-			{
-				game->player_x = j;
-				game->player_y = i;
-			}
-			if (map[i][j] == 'C')
-			{
-				game->collect_count++;
-			}
-			else if (!strchr("10E", map[i][j]))
-			{
-				return (false);
-			}
-			j++;
-		}
-		i++;
-	}
-	printf("collect_count = %zu\n", game->collect_count);
-	return (true);
+	
+	if (strchr(const char *str, int ))
+	return (false); 
 }
-
-void check_for_walls()
-{}
+*/
 
 bool check_p(char **map)
 {
@@ -165,6 +135,12 @@ bool check_p_e_c(char **map)
 	return (true);
 }
 
+void put_err(struct s_game *game)
+{
+	write(1, "Error\n", 6);
+	exit (0);
+}
+
 void err_exit(struct s_game *game, char *msg)
 {
 	char **map;
@@ -197,17 +173,7 @@ void check_if_rectangle(struct s_game *game)
     }
 }
 
-/*
-void check_map(struct s_game *game)
-{
-	if (!check_characters(game))
-	{
-		err_exit(game, "Invalid characters in map");
-	}
-}
-*/
-
-void check_invalid_tile(struct s_game *game)
+bool	check_invalid_tile(struct s_game *game)
 {
     size_t    i;
     size_t    j;
@@ -219,41 +185,98 @@ void check_invalid_tile(struct s_game *game)
         while (game->map[i][j])
         {
             if (!strchr("01PCE", game->map[i][j]))
-                printf("error");
-            j++;
+				return (false);
+			j++;
         }
     }
+	return (true);
 }
 
-// void que_add_back(struct s_node *ptr)
-// {
+#define CHECKED '*'
 
-// }
+void	explorer_map(char **map, int player_x, int player_y, struct s_game *game)
+{
+	int x;
+	int y;	
+
+	x = player_x;
+	y = player_y;
+	if (x == -1 || x == game->map_width || y == -1 || y == game->map_height)
+		exit(1);
+	else if (map[y][x] != CHECKED && map[y][x] != '1')
+	{
+		map[y][x] = CHECKED;
+		explorer_map(map, x + 1, y, game);
+		explorer_map(map, x - 1, y, game);
+		explorer_map(map, x, y + 1, game);
+		explorer_map(map, x, y - 1, game);
+	}
+}
 
 
-// struct s_node *que_take_front()
-// {
-// 	return (NULL);
-// }
+char **cpy_map(struct s_game *game)
+{
+	char **map;
+	char **res;
+	int j;
 
+	map = game->map;
+	res = malloc(sizeof(char*) * game->map_height);
+	int i = 0;
+	while (i < game->map_height)
+	{
+	 	j = 0;
+		res[i] = malloc(sizeof(char) * game->map_width);
+		while (j < game->map_width)
+		{
+			res[i][j] = map[i][j];
+			j++;
+		}
+		i++;
+	}
+	
+	return (res);
+}
 
 void get_map_size(struct s_game *game)
 {
-	
-		size_t i = 0;
+	size_t i = 0;
+
 	while (game->map[i])
 		i++;
 	game->map_height = i;	
 	i = 0;
-	while (game->map[0][i])
+	while (game->map[0] && game->map[0][i])
 		i++;
-	game->map_width = i;
+	game->map_width = i - 1 - 1;
+}
+
+void	check_map_size(struct s_game *game)
+{
+	if (game->map_height == 0 || game->map_width == 0)
+	{
+		put_err(game);
+	}
+	if (game->map_height > 50 || game->map_width > 50)
+	{
+		put_err(game);
+	}
 }
 
 void all_err_check(struct s_game *game)
 {
-	check_characters(game);
+	char **cpied_map;
+	
 	get_map_size(game);
-	check_p_e_c(game->map);
+	check_map_size(game);
+	cpied_map = cpy_map(game);
+	explorer_map(cpied_map, game->player_x, game->player_y, game);
+	if (check_p_e_c(game->map) == false)
+		put_err(game);
+	if (check_invalid_tile(game) == false)
+		put_err(game);
 	check_if_rectangle(game);
 }
+
+
+//void invalid_open()

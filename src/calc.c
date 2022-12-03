@@ -6,9 +6,8 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:57 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/03 15:35:35 by mmatsuo          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*   Updated: 2022/12/03 16:58:12 by mmatsuo          ###   ########.fr       */
+/*                                                                            */ /* ************************************************************************** */
 
 #include "so_long.h"
 #include <string.h>
@@ -45,6 +44,7 @@ bool check_collision(struct s_game *game, int player_next_y, int player_next_x)
 	if (game->map[player_next_y][player_next_x] == 'C')
 	{
 		game->collect_count--;
+		game->map[player_next_y][player_next_x] = '0';
 		return (false);
 	}
 	if (game->map[player_next_y][player_next_x] == 'E') 

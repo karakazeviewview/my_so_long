@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/03 15:34:15 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/03 18:02:26 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ struct s_game
 	struct IMG img;
 };
 
+void put_err(struct s_game *game);
 void all_err_check(struct s_game *game);
 char *mini_get_next_line(int fd);
 char **input_map(char *file_name);
