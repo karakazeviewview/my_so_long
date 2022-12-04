@@ -1,9 +1,20 @@
-/*
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/04 19:59:02 by mmatsuo           #+#    #+#             */
+/*   Updated: 2022/12/04 20:09:51 by mmatsuo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 struct s_game	*init_value(void)
 {
-	struct s_game *g;
+	struct s_game	*g;
 
 	g = malloc(sizeof(struct s_game));
 	g->step_count = 0;
@@ -36,15 +47,15 @@ int	main(int argc, char **argv)
 	mlx_loop(game->mlx_ptr);
 	return (0);
 }
-*/
-
+/*
 #include "so_long.h"
 
 int	main(int argc, char **argv)
 {
-	char			*file_name = argv[1];
+	char			*file_name;
 	struct s_game	*game;
 
+	file_name = argv[1];
 	game = malloc(sizeof(struct s_game));
 	game->player_y = 0;
 	game->player_x = 0;
@@ -63,3 +74,4 @@ int	main(int argc, char **argv)
 	mlx_loop(game->mlx_ptr);
 	return (0);
 }
+*/

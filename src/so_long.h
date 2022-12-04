@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 19:31:32 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 20:02:51 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ void	all_err_check(struct s_game *game);
 char	*mini_get_next_line(int fd);
 char	**input_map(char *file_name);
 void	display_grid(struct s_game *game, int x, int y, char tile);
-//void display_grid(void *mlx_ptr, void *win_ptr, struct s_img img, int x, int y, char tile);
 void	display_img(struct s_game *game);
 int		display_player(struct s_game *game);
 void	display_floor(struct s_game *game);
 void	exit_game(struct s_game *game);
-bool	check_collision(struct s_game *game, int player_next_y, int player_next_x);
+bool	check_collision(struct s_game *game,
+			int player_next_y, int player_next_x);
 int		input_key(int key_code, struct s_game *game);
 int		move_player(struct s_game *game);
 void	init_game(struct s_game *game);

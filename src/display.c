@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:35 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 19:32:31 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 20:04:22 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,18 @@
 void	display_grid(struct s_game *game, int y, int x, char tile)
 {
 	if (tile == '1')
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.wall_img, x, y);
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+			game->img.wall_img, x, y);
 	if (tile == '0')
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.floor_img, x, y);
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+			game->img.floor_img, x, y);
 	if (tile == 'C')
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.collection_img, x, y);
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+			game->img.collection_img, x, y);
 	if (tile == 'E')
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.exit_img, x, y);
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+			game->img.exit_img, x, y);
 }
-
-/*
-void	display_grid(void *mlx_ptr, void *win_ptr,
-		struct s_img img, int x, int y, char tile)
-{
-	if (tile == '1')
-		mlx_put_image_to_window(mlx_ptr, win_ptr, img.wall_img, x, y);
-	if (tile == '0')
-		mlx_put_image_to_window(mlx_ptr, win_ptr, img.floor_img, x, y);
-	if (tile == 'C')
-		mlx_put_image_to_window(mlx_ptr, win_ptr, img.collection_img, x, y);
-	if (tile == 'E')
-		mlx_put_image_to_window(mlx_ptr, win_ptr, img.exit_img, x, y);
-}
-*/
 
 void	display_img(struct s_game *game)
 {
@@ -58,9 +47,7 @@ void	display_img(struct s_game *game)
 		while (game->map[i][j] != '\0')
 		{
 			display_grid(game,
-			i * 59, j * 59, game->map[i][j]);
-			//display_grid(game->mlx_ptr, game->win_ptr, game->img,
-				//j * 59, i * 59, game->map[i][j]);
+				i * 59, j * 59, game->map[i][j]);
 			j++;
 		}
 		i++;

@@ -6,11 +6,12 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:57 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 16:12:59by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 19:59:31 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
 char	*mini_get_next_line(int fd)
 {
 	int		i;
@@ -21,7 +22,6 @@ char	*mini_get_next_line(int fd)
 	buffer = malloc(10000);
 	rd = 0;
 	i = 0;
-	//while ((rd = read(fd, &character, 1)) > 0)
 	rd = read(fd, &character, 1);
 	while (rd > 0)
 	{
@@ -38,32 +38,6 @@ char	*mini_get_next_line(int fd)
 	buffer[i] = '\0';
 	return (buffer);
 }
-#include <unistd.h>
-#include <stdlib.h>
-
-/*
-char *mini_get_next_line(int fd)
-{
-    int 	i = 0;
-    int 	rd = 0;
-    char	character;
-    char 	*buffer = malloc(10000);
-
-    while ((rd = read(fd, &character, 1)) > 0)
-    {
-        buffer[i++] = character;
-        if (character == '\n')
-            break;
-    }
-    if ((!buffer[i - 1] && !rd) || rd == -1)
-    {
-        free(buffer);
-        return (NULL);
-    }
-    buffer[i] =  '\0';
-    return(buffer);
-}
-*/
 
 bool	check_collision(struct s_game *game,
 		int player_next_y, int player_next_x)
@@ -98,8 +72,7 @@ int	move_player(struct s_game *game)
 	{
 		if (check_collision(game, game->player_y, game->player_x - 1) == true)
 			return (0);
-		else
-			game->player_x = (game->player_x - 1);
+		game->player_x = (game->player_x - 1);
 	}
 	if (game->key_code == KEY_DOWN)
 	{
@@ -111,8 +84,7 @@ int	move_player(struct s_game *game)
 	{
 		if (check_collision(game, game->player_y, game->player_x + 1) == true)
 			return (0);
-		else
-			game->player_x = (game->player_x + 1);
+		game->player_x = (game->player_x + 1);
 	}
 	return (0);
 }
