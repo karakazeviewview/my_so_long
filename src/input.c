@@ -6,13 +6,13 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:05:06 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 01:06:58 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 11:39:10 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int input_key(int key_code, struct s_game *game)
+int	input_key(int key_code, struct s_game *game)
 {
 	//printf("%d\n", key_code);
 	game->key_code = key_code;
@@ -22,15 +22,16 @@ int input_key(int key_code, struct s_game *game)
 	return (0);
 }
 
-char **input_map(char *file_name)
+char	**input_map(char *file_name)
 {
-	int fd;
+	int		fd;
+	char	**map;
+
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
 		put_err(NULL);
 	}
-	char **map;
 	map = (char**)malloc(sizeof(char*) * 55);
 	map[0] = mini_get_next_line(fd);
 	int i = 0;

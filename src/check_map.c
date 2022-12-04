@@ -6,20 +6,21 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 22:04:44 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 01:20:16 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 13:05:48 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void check_map(struct s_game *game)
+void	check_map(struct s_game *game)
 {
-	int i = 0;
-	int j;
-	char **map;
+	int		i;
+	int		j;
+	char	**map;
 
 	game->collect_count = 0;
 	map = game->map;
+	i = 0;
 	while (map[i] != NULL)
 	{
 		j = 0;
@@ -31,30 +32,20 @@ void check_map(struct s_game *game)
 				game->player_y = i;
 			}
 			if (map[i][j] == 'C')
-			{
 				game->collect_count++;
-			}
 			j++;
 		}
 		i++;
 	}
+	printf("collect_count = %zu\n", game->collect_count);
 }
 
-/*
-bool	check_wrong_character(struct s_game *game)
+bool	check_p(char **map)
 {
-	
-	if (strchr(const char *str, int ))
-	return (false); 
-}
-*/
+	size_t	x;
+	size_t	y;
+	size_t	p_count;
 
-bool check_p(char **map)
-{
-	size_t x;
-	size_t y;
-	size_t p_count;
-	
 	y = 0;
 	p_count = 0;
 	while (map[y] != NULL)
@@ -74,12 +65,12 @@ bool check_p(char **map)
 		return (false);
 }
 
-bool check_e(char **map)
+bool	check_e(char **map)
 {
-	size_t x;
-	size_t y;
-	size_t e_count;
-	
+	size_t	x;
+	size_t	y;
+	size_t	e_count;
+
 	y = 0;
 	e_count = 0;
 	while (map[y] != NULL)
@@ -99,12 +90,12 @@ bool check_e(char **map)
 		return (false);
 }
 
-bool check_c(char **map)
+bool	check_c(char **map)
 {
-	size_t x;
-	size_t y;
-	size_t c_count;
-	
+	size_t	x;
+	size_t	y;
+	size_t	c_count;
+
 	y = 0;
 	c_count = 0;
 	while (map[y] != NULL)
@@ -124,7 +115,7 @@ bool check_c(char **map)
 		return (false);
 }
 
-bool check_p_e_c(char **map)
+bool	check_p_e_c(char **map)
 {
 	if (check_p(map) == false)
 		return (false);
@@ -135,17 +126,18 @@ bool check_p_e_c(char **map)
 	return (true);
 }
 
-void put_err(struct s_game *game)
+void	put_err(struct s_game *game)
 {
-	write(1, "Error\n", 6);
+	printf("Error\n");
 	exit (0);
 }
 
-void err_exit(struct s_game *game, char *msg)
+void	err_exit(struct s_game *game, char *msg)
 {
-	char **map;
-	int i = 0;
+	char	**map;
+	int		i;
 
+	i = 0;
 	while (map[i])
 	{
 		free(map[i]);
@@ -158,51 +150,64 @@ void err_exit(struct s_game *game, char *msg)
 	exit (0);
 }
 
-void check_if_rectangle(struct s_game *game)
+void	check_if_rectangle(struct s_game *game)
 {
-    size_t    len;
-    size_t    i;
+	size_t	len;
+	size_t	i;
 
-    len = strlen(game->map[0]);
-    i = 1;
-    while (game->map[i])
-    {
-        if (len != strlen(game->map[i]))
-            printf("error");
-        i++;
-    }
+	len = strlen(game->map[0]);
+	i = 1;
+	while (game->map[i])
+	{
+		if (i == game->map_height - 1)
+		{
+			if (len != strlen(game->map[i]) + 1)
+				put_err(game);
+		}		
+		else
+		{
+			if (len != strlen(game->map[i]))
+				put_err(game);
+		}
+		i++;
+	}
 }
 
 bool	check_invalid_tile(struct s_game *game)
 {
-    size_t    i;
-    size_t    j;
+	size_t	i;
+	size_t	j;
 
-    i = 0;
-    while (game->map[i])
-    {
-        j = 0;
-        while (game->map[i][j])
-        {
-            if (!strchr("01PCE", game->map[i][j]))
+	i = 0;
+	printf("%d\n", game->map_height);
+	printf("%d\n", game->map_width);
+	while (i < game->map_height)
+	{
+		j = 0;
+		while (j < game->map_width)
+		{
+			printf("%c", game->map[i][j]);
+			if (!strchr("01PCE\n", game->map[i][j]))
 				return (false);
 			j++;
-        }
-    }
+		}
+		i++;
+	}
 	return (true);
 }
 
-#define CHECKED '*'
-
-void	explorer_map(char **map, int player_x, int player_y, struct s_game *game)
+void	explorer_map(char **map, int player_x,
+		int player_y, struct s_game *game)
 {
-	int x;
-	int y;	
+	int	x;
+	int	y;	
 
 	x = player_x;
 	y = player_y;
 	if (x == -1 || x == game->map_width || y == -1 || y == game->map_height)
-		exit(1);
+	{
+		put_err(game);
+	}
 	else if (map[y][x] != CHECKED && map[y][x] != '1')
 	{
 		map[y][x] = CHECKED;
@@ -213,19 +218,19 @@ void	explorer_map(char **map, int player_x, int player_y, struct s_game *game)
 	}
 }
 
-
-char **cpy_map(struct s_game *game)
+char	**cpy_map(struct s_game *game)
 {
-	char **map;
-	char **res;
-	int j;
+	char	**map;
+	char	**res;
+	int		i;
+	int		j;
 
 	map = game->map;
-	res = malloc(sizeof(char*) * game->map_height);
-	int i = 0;
+	res = malloc(sizeof(char *) * game->map_height);
+	i = 0;
 	while (i < game->map_height)
 	{
-	 	j = 0;
+		j = 0;
 		res[i] = malloc(sizeof(char) * game->map_width);
 		while (j < game->map_width)
 		{
@@ -234,21 +239,21 @@ char **cpy_map(struct s_game *game)
 		}
 		i++;
 	}
-	
 	return (res);
 }
 
-void get_map_size(struct s_game *game)
+void	get_map_size(struct s_game *game)
 {
-	size_t i = 0;
+	size_t	i;
 
+	i = 0;
 	while (game->map[i])
 		i++;
-	game->map_height = i;	
+	game->map_height = i;
 	i = 0;
 	while (game->map[0] && game->map[0][i])
 		i++;
-	game->map_width = i - 1 - 1;
+	game->map_width = i - 1;
 }
 
 void	check_map_size(struct s_game *game)
@@ -263,10 +268,10 @@ void	check_map_size(struct s_game *game)
 	}
 }
 
-void all_err_check(struct s_game *game)
+void	all_err_check(struct s_game *game)
 {
-	char **cpied_map;
-	
+	char	**cpied_map;
+
 	get_map_size(game);
 	check_map_size(game);
 	cpied_map = cpy_map(game);
@@ -277,6 +282,3 @@ void all_err_check(struct s_game *game)
 		put_err(game);
 	check_if_rectangle(game);
 }
-
-
-//void invalid_open()

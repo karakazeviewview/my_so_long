@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/03 18:02:26 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 11:27:49 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <mlx.h>
 #include <stdbool.h>
 #include <fcntl.h>
+#define CHECKED '*'
 #define KEY_UP 13
 #define KEY_LEFT 0
 #define KEY_DOWN 1

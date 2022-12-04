@@ -6,12 +6,12 @@
 #    By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 21:09:27 by mmatsuo           #+#    #+#              #
-#    Updated: 2022/12/04 01:03:10 by mmatsuo          ###   ########.fr        #
+#    Updated: 2022/12/04 12:23:18 by mmatsuo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	so_long
-CC		=	cc
+CC		=	cc -g
 #CFLAGS	=	-Wall -Wextra -Werror
 INCLUDE	=	-I include
 
@@ -55,7 +55,7 @@ ERROR_MAPS := ${addprefix ${MAP_DIR},${ERROR_MAP_SRCS:.c=.o}}
 play: all
 	@for map in ${TEST_MAPS} ; \
 	do ./${NAME} $$map ; done
-	@echo ----finish----"
+	@echo "----finish----"
 
 dev: all
 	@for emap in ${ERROR_MAPS} ; \

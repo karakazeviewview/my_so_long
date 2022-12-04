@@ -6,16 +6,16 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 20:59:29 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 01:07:17 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 12:48:22 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	char *file_name = argv[1];
-	struct s_game *game;
+	char			*file_name = argv[1];
+	struct s_game	*game;
 
 	game = malloc(sizeof(struct s_game));
 	game->player_y = 0;
