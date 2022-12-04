@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 19:59:02 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 20:09:51 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 23:34:00 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,15 @@ int	main(int argc, char **argv)
 	char			*file_name;
 	struct s_game	*game;
 
+	if (argc != 2)
+	{
+		put_err(NULL);
+	}
 	file_name = argv[1];
 	game = init_value();
 	game->mlx_ptr = mlx_init();
 	game->map = input_map(file_name);
-	check_map(game);
+	load_map(game);
 	all_err_check(game);
 	init_game(game);
 	display_img(game);
@@ -65,7 +69,7 @@ int	main(int argc, char **argv)
 	game->mlx_ptr = mlx_init();
 	game->map = input_map(file_name);
 	game->key_code = -1;
-	check_map(game);
+	load_map(game);
 	all_err_check(game);
 	init_game(game);
 	display_img(game);

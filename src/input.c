@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:05:06 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 14:50:07 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 23:17:45 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,45 @@ char	**input_map(char *file_name)
 		map[i] = mini_get_next_line(fd);
 	}
 	return (map);
+}
+
+void	load_map(struct s_game *game)
+{
+	int		i;
+	int		j;
+	char	**map;
+
+	game->collect_count = 0;
+	map = game->map;
+	i = 0;
+	while (map[i] != NULL)
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] == 'P')
+			{
+				game->player_x = j;
+				game->player_y = i;
+			}
+			if (map[i][j] == 'C')
+				game->collect_count++;
+			j++;
+		}
+		i++;
+	}
+}
+
+void	get_map_size(struct s_game *game)
+{
+	size_t	i;
+
+	i = 0;
+	while (game->map[i])
+		i++;
+	game->map_height = i;
+	i = 0;
+	while (game->map[0] && game->map[0][i])
+		i++;
+	game->map_width = i - 1;
 }

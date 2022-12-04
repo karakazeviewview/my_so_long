@@ -6,18 +6,11 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:35 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 20:04:22 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 23:30:50 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//void	put_step(struct s_game *game)
-//{
-	//ft_putnbr(1, &str);
-	//printf("%zu steps\n", game->step_count);
-	//game->step_count++;
-//}
 
 void	display_grid(struct s_game *game, int y, int x, char tile)
 {
@@ -55,11 +48,16 @@ void	display_img(struct s_game *game)
 	display_player(game);
 }
 
+void	put_step(struct s_game *game)
+{
+	ft_write_number(game->step_count);
+	write(1, " steps", 6);
+	write(1, "\n", 1);
+	game->step_count++;
+}
+
 int	display_player(struct s_game *game)
 {
-	int	x;
-	int	y;
-
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.player_img,
 		game->player_x * 59, game->player_y * 59);
 	if (game->key_code != -1)
@@ -67,7 +65,7 @@ int	display_player(struct s_game *game)
 		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
 			game->img.floor_img, game->player_old_x * 59,
 			game->player_old_y * 59);
-		//put_step(game);
+		put_step(game);
 		game->key_code = -1;
 	}
 	return (0);

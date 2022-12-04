@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 20:02:51 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 23:27:29 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,12 @@ struct s_game
 	size_t			collect_count;
 	struct s_img	img;
 };
-
+void	get_map_size(struct s_game *game);
+bool	check_p_e_c(char **map);
+char	**cpy_map(struct s_game *game);
+size_t	ft_strlen(const char	*str);
+void	ft_write_number(int number);
+char	*ft_strchr2(const char *s, int c);
 void	put_err(struct s_game *game);
 void	all_err_check(struct s_game *game);
 char	*mini_get_next_line(int fd);
@@ -70,7 +75,7 @@ bool	check_collision(struct s_game *game,
 int		input_key(int key_code, struct s_game *game);
 int		move_player(struct s_game *game);
 void	init_game(struct s_game *game);
-void	check_map(struct s_game *game);
+void	load_map(struct s_game *game);
 int		main(int argc, char **argv);
 int		update_game(struct s_game *game);
 #endif

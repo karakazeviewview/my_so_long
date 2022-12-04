@@ -6,24 +6,31 @@
 #    By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 21:09:27 by mmatsuo           #+#    #+#              #
-#    Updated: 2022/12/04 12:23:18 by mmatsuo          ###   ########.fr        #
+#    Updated: 2022/12/05 00:03:53 by mmatsuo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	so_long
 CC		=	cc -g
-#CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 INCLUDE	=	-I include
 
-SRCS		=	src/display.c src/input.c src/calc.c src/main.c src/init.c src/check_map.c
+SRCS		=	src/display.c src/input.c src/calc.c src/main.c src/init.c src/check_map.c src/utils.c src/error.c src/check_playable.c
 OBJS		=	$(SRCS:%.c=$(OBJDIR)/%.o)
+
+MLXDIR		=	minilibx_mms_20200219/
 LIBMLX		=	libmlx.dylib
 OBJDIR		=	objs
 
+
 all:	$(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) ${LIBMLX}
 			$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $(NAME)
+
+${LIBMLX}:
+	@${MAKE} -C ${MLXDIR}
+	cp ${MLXDIR}${LIBMLX} .
 
 $(OBJDIR)/%.o:%.c
 			@mkdir -p $(@D)
@@ -45,11 +52,10 @@ ERROR_MAP_SRCS := E00_empty.ber \
 				E09_too_large.ber \
 				E11_wrong_char.ber \
 				E12_void_first_line.ber \
-				.ber
 
 MAP_DIR := maps/
 TEST_MAPS := ${addprefix ${MAP_DIR},${TEST_MAP_SRCS:.c=.o}}
-ERROR_MAPS := ${addprefix ${MAP_DIR},${ERROR_MAP_SRCS:.c=.o}}
+ERROR_MAPS := ${addprefix ${MAP_DIR},${ERROR_MAP_SRCS}}
 
 # Debug commands
 play: all
@@ -58,15 +64,17 @@ play: all
 	@echo "----finish----"
 
 dev: all
-	@for emap in ${ERROR_MAPS} ; \
-	do ./${NAME} $$emap ; done
+	@for emap in ${ERROR_MAPS} ; do \
+	cat $$emap ; echo "\n" ; \
+	./${NAME} $$emap ; done
 	@echo "----finish----"
 
 clean:
-		rm -rf $(OBJDIR)
-		make fclean -C libft
+		make clean -C ${MLXDIR} --no-print-directory
+		${RM} -rf $(OBJDIR)
 
 fclean:	clean
+		rm -f ${LIBMLX}
 		rm -f $(NAME)
 
 re:		fclean all
