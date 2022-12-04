@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 22:04:44 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 13:05:48 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:03:50 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	check_map(struct s_game *game)
 		}
 		i++;
 	}
-	printf("collect_count = %zu\n", game->collect_count);
 }
 
 bool	check_p(char **map)
@@ -128,7 +127,7 @@ bool	check_p_e_c(char **map)
 
 void	put_err(struct s_game *game)
 {
-	printf("Error\n");
+	write(1, "Error\n", 6);
 	exit (0);
 }
 
@@ -145,7 +144,7 @@ void	err_exit(struct s_game *game, char *msg)
 	}
 	free(map);
 	free(game);
-	printf("Error\n");
+	write(1, "Error\n", 6);
 	printf("%s\n", msg);
 	exit (0);
 }
@@ -179,14 +178,11 @@ bool	check_invalid_tile(struct s_game *game)
 	size_t	j;
 
 	i = 0;
-	printf("%d\n", game->map_height);
-	printf("%d\n", game->map_width);
 	while (i < game->map_height)
 	{
 		j = 0;
 		while (j < game->map_width)
 		{
-			printf("%c", game->map[i][j]);
 			if (!strchr("01PCE\n", game->map[i][j]))
 				return (false);
 			j++;
