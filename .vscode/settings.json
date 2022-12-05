@@ -1,8 +1,0 @@
-{
-	"files.associations": {
-		"__config": "c",
-		"locale": "c",
-		"mlx.h": "c",
-		"fcntl.h": "c"
-	}
-}
