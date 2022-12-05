@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 19:59:02 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 23:34:00 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:47:18 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
+		write(1, "no arg ", 7);
 		put_err(NULL);
 	}
 	file_name = argv[1];

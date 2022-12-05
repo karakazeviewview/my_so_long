@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:05:06 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 23:17:45 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:46:30 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	**input_map(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
+		write(1, "invalid map ", 12);
 		put_err(NULL);
 	}
 	map = (char **)malloc(sizeof(char *) * 55);

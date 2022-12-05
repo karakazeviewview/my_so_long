@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 23:27:29 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:24:05 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # define CHECKED '*'
+# define KEY_ARROW_UP 126
+# define KEY_ARROW_LEFT 123
+# define KEY_ARROW_DOWN 125
+# define KEY_ARROW_RIGHT 124
+# define KEY_ESC 53
 # define KEY_UP 13
 # define KEY_LEFT 0
 # define KEY_DOWN 1
@@ -55,6 +60,7 @@ struct s_game
 	size_t			collect_count;
 	struct s_img	img;
 };
+int		esc_game(struct s_game *game);
 void	get_map_size(struct s_game *game);
 bool	check_p_e_c(char **map);
 char	**cpy_map(struct s_game *game);

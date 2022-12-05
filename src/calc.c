@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:57 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 19:59:31 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:28:31 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,25 @@ bool	check_collision(struct s_game *game,
 
 int	move_player(struct s_game *game)
 {
-	if (game->key_code == KEY_UP)
+	if (game->key_code == KEY_UP || game->key_code == KEY_ARROW_UP)
 	{
 		if (check_collision(game, game->player_y - 1, game->player_x) == true)
 			return (0);
 		game->player_y = (game->player_y - 1);
 	}
-	if (game->key_code == KEY_LEFT)
+	if (game->key_code == KEY_LEFT || game->key_code == KEY_ARROW_LEFT)
 	{
 		if (check_collision(game, game->player_y, game->player_x - 1) == true)
 			return (0);
 		game->player_x = (game->player_x - 1);
 	}
-	if (game->key_code == KEY_DOWN)
+	if (game->key_code == KEY_DOWN || game->key_code == KEY_ARROW_DOWN)
 	{
 		if (check_collision(game, game->player_y + 1, game->player_x) == true)
 			return (0);
 		game->player_y = (game->player_y + 1);
 	}
-	if (game->key_code == KEY_RIGHT)
+	if (game->key_code == KEY_RIGHT || game->key_code == KEY_ARROW_RIGHT)
 	{
 		if (check_collision(game, game->player_y, game->player_x + 1) == true)
 			return (0);
@@ -92,6 +92,14 @@ int	move_player(struct s_game *game)
 int	update_game(struct s_game *game)
 {
 	move_player(game);
+	esc_game(game);
 	display_player(game);
+	return (0);
+}
+
+int	esc_game(struct s_game *game)
+{
+	if (game->key_code == KEY_ESC)
+		exit_game(game);
 	return (0);
 }
