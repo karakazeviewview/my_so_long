@@ -6,7 +6,7 @@
 #    By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 21:09:27 by mmatsuo           #+#    #+#              #
-#    Updated: 2022/12/05 00:03:53 by mmatsuo          ###   ########.fr        #
+#    Updated: 2022/12/05 22:58:47 by mmatsuo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ ERROR_MAP_SRCS := E00_empty.ber \
 				E12_void_first_line.ber \
 
 MAP_DIR := maps/
-TEST_MAPS := ${addprefix ${MAP_DIR},${TEST_MAP_SRCS:.c=.o}}
+TEST_MAPS := ${addprefix ${MAP_DIR},${TEST_MAP_SRCS}}
 ERROR_MAPS := ${addprefix ${MAP_DIR},${ERROR_MAP_SRCS}}
 
 # Debug commands
