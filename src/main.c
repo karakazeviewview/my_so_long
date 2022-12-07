@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: yshimoda <yshimoda@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 19:59:02 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/05 19:47:18 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/08 03:14:26 by yshimoda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ int	main(int argc, char **argv)
 	struct s_game	*game;
 
 	if (argc != 2)
-	{
-		write(1, "no arg ", 7);
-		put_err(NULL);
-	}
+		put_err("no arg\n");
 	file_name = argv[1];
 	game = init_value();
 	game->mlx_ptr = mlx_init();
