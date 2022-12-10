@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:35 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 00:43:37 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 07:31:51 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ int	display_player(struct s_game *game)
 {
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.player_img,
 		game->player_x * 59, game->player_y * 59);
-	if (game->key_code == KEY_UP || game->key_code == KEY_DOWN
-		|| game->key_code == KEY_LEFT || game->key_code == KEY_RIGHT
-		|| game->key_code == KEY_ARROW_UP || game->key_code == KEY_ARROW_DOWN
-		|| game->key_code == KEY_ARROW_LEFT || game->key_code == KEY_ARROW_RIGHT)
+	if (game->key_code == KEY_UP || game->key_code == KEY_DOWN \
+		|| game->key_code == KEY_LEFT || game->key_code == KEY_RIGHT \
+		|| game->key_code == KEY_ARROW_UP || game->key_code == KEY_ARROW_DOWN \
+		|| game->key_code == KEY_ARROW_LEFT || \
+		game->key_code == KEY_ARROW_RIGHT)
 	{
 		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
 			game->img.floor_img, game->player_old_x * 59,
