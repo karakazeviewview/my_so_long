@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 19:59:02 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 00:44:25 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 08:34:39 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ struct s_game	*init_value(void)
 	struct s_game	*g;
 
 	g = malloc(sizeof(struct s_game));
+	if (!g)
+		put_err("malloc error\n");
 	g->step_count = 0;
 	g->map_height = 0;
 	g->map_width = 0;
@@ -35,13 +37,12 @@ int	main(int argc, char **argv)
 	struct s_game	*game;
 
 	if (argc != 2)
-	{
-		write(1, "no arg ", 7);
-		put_err(NULL);
-	}
+		put_err("no arg\n");
 	file_name = argv[1];
 	game = init_value();
 	game->mlx_ptr = mlx_init();
+	if (!game->mlx_ptr)
+		put_err("malloc error\n");
 	game->map = input_map(file_name);
 	load_map(game);
 	all_err_check(game);

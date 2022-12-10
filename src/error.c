@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: yshimoda <yshimoda@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:16:42 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 23:38:13 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/08 02:47:35 by yshimoda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	put_err(struct s_game *game)
+void	put_err(const char *str)
 {
-	(void)game;
-	write(1, "Error\n", 6);
-	exit (0);
+	write(STDERR_FILENO, "Error\n", 6);
+	if (str)
+		write(STDERR_FILENO, str, ft_strlen(str));
+	exit (EXIT_FAILURE);
 }
 
 void	err_exit(struct s_game *game, char *msg)
