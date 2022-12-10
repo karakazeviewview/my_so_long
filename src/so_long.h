@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 08:34:49 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 08:37:12 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,27 @@
 
 # define CLUSTER
 
-# ifdef CLUSTER
-#  define KEY_ARROW_UP 126
-#  define KEY_ARROW_LEFT 123
-#  define KEY_ARROW_DOWN 125
-#  define KEY_ARROW_RIGHT 124
-#  define KEY_ESC 53
-#  define KEY_UP 13
-#  define KEY_LEFT 0
-#  define KEY_DOWN 1
-#  define KEY_RIGHT 2
-# else
-#  define KEY_ARROW_UP 65362
-#  define KEY_ARROW_LEFT 65361
-#  define KEY_ARROW_DOWN 65364
-#  define KEY_ARROW_RIGHT 65363
-#  define KEY_ESC 65307
-#  define KEY_UP 'w'
-#  define KEY_LEFT 'a'
-#  define KEY_DOWN 's'
-#  define KEY_RIGHT 'd'
-# endif
+// # ifdef CLUSTER
+# define KEY_ARROW_UP 126
+# define KEY_ARROW_LEFT 123
+# define KEY_ARROW_DOWN 125
+# define KEY_ARROW_RIGHT 124
+# define KEY_ESC 53
+# define KEY_UP 13
+# define KEY_LEFT 0
+# define KEY_DOWN 1
+# define KEY_RIGHT 2
+// # else
+// #  define KEY_ARROW_UP 65362
+// #  define KEY_ARROW_LEFT 65361
+// #  define KEY_ARROW_DOWN 65364
+// #  define KEY_ARROW_RIGHT 65363
+// #  define KEY_ESC 65307
+// #  define KEY_UP 'w'
+// #  define KEY_LEFT 'a'
+// #  define KEY_DOWN 's'
+// #  define KEY_RIGHT 'd'
+// # endif
 
 # define CHECKED '*'
 # define IMG_WALL "img/wall.xpm"
