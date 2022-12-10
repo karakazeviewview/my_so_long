@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:05:06 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/05 19:46:30 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/05 23:37:10 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	**input_map(char *file_name)
 		i++;
 		map[i] = mini_get_next_line(fd);
 	}
+	close(fd);
 	return (map);
 }
 
