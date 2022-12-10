@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:57 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/05 22:20:06 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 00:42:07 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ bool	check_collision(struct s_game *game,
 		int player_next_y, int player_next_x)
 {
 	if (game->map[player_next_y][player_next_x] == '1')
+	{
+		game->key_code = -1;
 		return (true);
+	}
 	if (game->map[player_next_y][player_next_x] == 'C')
 	{
 		game->collect_count--;
@@ -55,7 +58,10 @@ bool	check_collision(struct s_game *game,
 		if (game->collect_count == 0)
 			exit_game(game);
 		else
+		{
+			game->key_code = -1;
 			return (true);
+		}
 	}
 	return (false);
 }
