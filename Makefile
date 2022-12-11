@@ -3,7 +3,7 @@ NAME		=	so_long
 CC			=	cc
 # CFLAGS		=	-Wall -Wextra -Werror
 CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
-LIBFT = src/42_libft/libft.a
+
 SRCS		=	src/calc.c				\
 				src/display.c   		\
 				src/check_map.c 		\
@@ -27,6 +27,9 @@ MLXDIR		=	minilibx_mms_20200219/
 MLXFLAGS	=	$(MLXDIR)/libmlx.dylib
 endif
 
+LIBFTDIR = src/42_libft
+LIBFT = ${LIBFTDIR}/libft.a
+
 INCLUDE		=	-I $(MLXDIR)
 
 OBJDIR		=	objs
@@ -35,7 +38,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJS) $(LIBFT)
 			@make -C $(MLXDIR)
-			$(CC) $(OBJS) $(CFLAGS) $(MLXFLAGS) src/42_libft/libft.a -o $(NAME)
+			$(CC) $(OBJS) $(CFLAGS) $(MLXFLAGS) ${LIBFT} -o $(NAME)
 			install_name_tool -change libmlx.dylib $(MLXDIR)/libmlx.dylib $(NAME)
 
 $(OBJDIR)/%.o:%.c
@@ -43,8 +46,7 @@ $(OBJDIR)/%.o:%.c
 			$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE)
 
 ${LIBFT}:
-	@make -C src/42_libft
-	@make -C src/42_libft
+	@make -C ${LIBFTDIR}
 
 # Map files
 TEST_MAP_SRCS :=	T00_basic1.ber \
@@ -106,10 +108,12 @@ yshimoda: all
 	@echo "----finish----"
 
 clean:
-		make clean -C ${MLXDIR} --no-print-directory
+		${MAKE} clean -C ${MLXDIR} --no-print-directory
+		${MAKE} clean -C ${LIBFTDIR} --no-print-directory
 		${RM} -r $(OBJDIR)
 
 fclean:	clean
+		${MAKE} fclean -C ${LIBFTDIR} --no-print-directory
 		$(RM) $(NAME)
 
 re:		fclean all
