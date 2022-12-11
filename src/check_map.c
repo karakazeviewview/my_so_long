@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshimoda <yshimoda@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 00:14:07 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/08 03:12:43 by yshimoda         ###   ########.fr       */
+/*   Updated: 2022/12/11 11:49:50 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ void	explorer_map(char **map, int player_x,
 		put_err("not playable\n");
 	else if (map[y][x] != CHECKED && map[y][x] != '1')
 	{
+		if (map[y][x] == 'E')
+			game->is_exit = true;
+		if (map[y][x] == 'C')
+			game->is_collect_count++;
 		map[y][x] = CHECKED;
 		explorer_map(map, x + 1, y, game);
 		explorer_map(map, x - 1, y, game);
@@ -79,21 +83,34 @@ void	check_map_size(struct s_game *game)
 {
 	if (game->map_height == 0 || game->map_width == 0)
 		put_err("void line map\n");
-	if (game->map_height > 50 || game->map_width > 50)
+	if (game->map_height > 33 || game->map_width > 60)
 		put_err("too large\n");
 }
 
 void	all_err_check(struct s_game *game)
 {
 	char	**cpied_map;
+	int		i;
 
 	get_map_size(game);
 	check_map_size(game);
 	cpied_map = cpy_map(game);
 	explorer_map(cpied_map, game->player_x, game->player_y, game);
+	i = 0;
+	while (i < game->map_height)
+		free(cpied_map[i++]);
+	free(cpied_map);
+	if (game->collect_count != game->is_collect_count)
+		put_err("can not collect 'C'\n");
+	if (game->is_exit == false)
+		put_err("not playable\n");
 	if (check_p_e_c(game->map) == false)
 		put_err("wrong num of objects\n");
 	if (check_invalid_tile(game) == false)
 		put_err("invalid tile\n");
 	check_if_rectangle(game);
+	if (game->map[0][0] != '1' || game->map[0][game->map_width - 1] != '1' ||
+		game->map[game->map_height - 1][0] != '1' ||
+		game->map[game->map_height - 1][game->map_width - 1] != '1')
+		put_err("not surrounded by wall\n");
 }

@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:15:36 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/04 23:22:57 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 09:34:03 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	check_e(char **map)
 		}
 		y++;
 	}
-	if (e_count >= 1)
+	if (e_count == 1)
 		return (true);
 	else
 		return (false);

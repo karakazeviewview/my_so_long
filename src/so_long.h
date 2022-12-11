@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshimoda <yshimoda@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 09:15:27 by yshimoda         ###   ########.fr       */
+/*   Updated: 2022/12/11 11:51:54 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 # define CLUSTER
 
 # ifdef CLUSTER
-# define KEY_ARROW_UP 126
-# define KEY_ARROW_LEFT 123
-# define KEY_ARROW_DOWN 125
-# define KEY_ARROW_RIGHT 124
-# define KEY_ESC 53
-# define KEY_UP 13
-# define KEY_LEFT 0
-# define KEY_DOWN 1
-# define KEY_RIGHT 2
+#  define KEY_ARROW_UP 126
+#  define KEY_ARROW_LEFT 123
+#  define KEY_ARROW_DOWN 125
+#  define KEY_ARROW_RIGHT 124
+#  define KEY_ESC 53
+#  define KEY_UP 13
+#  define KEY_LEFT 0
+#  define KEY_DOWN 1
+#  define KEY_RIGHT 2
 # else
 #  define KEY_ARROW_UP 65362
 #  define KEY_ARROW_LEFT 65361
@@ -63,6 +63,8 @@ struct s_img
 
 struct s_game
 {
+	size_t			is_collect_count;
+	bool			is_exit;
 	char			**map;
 	size_t			step_count;
 	int				map_height;

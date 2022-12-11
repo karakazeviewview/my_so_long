@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshimoda <yshimoda@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 19:59:02 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 09:11:36 by yshimoda         ###   ########.fr       */
+/*   Updated: 2022/12/11 11:51:12 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ struct s_game	*init_value(void)
 	g->player_old_y = 0;
 	g->player_old_x = 0;
 	g->collect_count = 0;
+	g->is_exit = false;
+	g->is_collect_count = 0;
 	return (g);
 }
 
@@ -38,7 +40,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		put_err("no arg\n");
-	if (ft_strlen(argv[1]) < 4 || ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4))
+	if (ft_strlen(argv[1]) < 4 || ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, \
+	".ber", 4))
 		put_err("name error\n");
 	file_name = argv[1];
 	game = init_value();
@@ -55,3 +58,8 @@ int	main(int argc, char **argv)
 	mlx_loop(game->mlx_ptr);
 	return (0);
 }
+
+//__attribute__((destructor)) static void destructor()
+//{
+	//system("leaks -q so_long");
+//}

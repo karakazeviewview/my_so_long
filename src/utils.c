@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshimoda <yshimoda@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 22:54:36 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 09:03:43 by yshimoda         ###   ########.fr       */
+/*   Updated: 2022/12/11 11:52:26 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,15 @@ char	**cpy_map(struct s_game *game)
 
 	map = game->map;
 	res = malloc(sizeof(char *) * game->map_height);
+	if (!res)
+		perror("malloc Error");
 	i = 0;
 	while (i < game->map_height)
 	{
 		j = 0;
 		res[i] = malloc(sizeof(char) * game->map_width);
+		if (!res[i])
+			perror("malloc Error");
 		while (j < game->map_width)
 		{
 			res[i][j] = map[i][j];

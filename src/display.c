@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:35 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 08:37:59 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 11:50:40 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	display_img(struct s_game *game)
 		while (game->map[i][j] != '\0')
 		{
 			display_grid(game,
-				i * 59, j * 59, game->map[i][j]);
+				i * 32, j * 32, game->map[i][j]);
 			j++;
 		}
 		i++;
@@ -59,16 +59,16 @@ void	put_step(struct s_game *game)
 int	display_player(struct s_game *game)
 {
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.player_img,
-		game->player_x * 59, game->player_y * 59);
+		game->player_x * 32, game->player_y * 32);
 	if (game->key_code == KEY_UP || game->key_code == KEY_DOWN \
 		|| game->key_code == KEY_LEFT || game->key_code == KEY_RIGHT \
 		|| game->key_code == KEY_ARROW_UP || game->key_code == KEY_ARROW_DOWN \
 		|| game->key_code == KEY_ARROW_LEFT || \
-		 game->key_code == KEY_ARROW_RIGHT)
+		game->key_code == KEY_ARROW_RIGHT)
 	{
 		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-			game->img.floor_img, game->player_old_x * 59,
-			game->player_old_y * 59);
+			game->img.floor_img, game->player_old_x * 32,
+			game->player_old_y * 32);
 		put_step(game);
 		game->key_code = -1;
 	}

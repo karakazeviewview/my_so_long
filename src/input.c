@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:05:06 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 08:37:23 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 11:16:34 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,18 @@ char	**input_map(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 		put_err("invalid map\n");
-	map = (char **)malloc(sizeof(char *) * 55);
-	map[0] = mini_get_next_line(fd);
+	map = (char **)malloc(sizeof(char *) * 35);
+	if (!map)
+		put_err("malloc error\n");
 	i = 0;
-	while (map[i] != NULL && i < 55)
+	while (i < 35)
+		map[i++] = NULL;
+	i = 0;
+	while (i < 34)
 	{
-		i++;
 		map[i] = mini_get_next_line(fd);
+		i++;
 	}
-	map[i] = NULL;
 	close(fd);
 	return (map);
 }
