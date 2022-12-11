@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 12:12:24 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 10:34:56 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 20:56:36 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_game(struct s_game *game)
 			game->map_height * 32, "mlx 42");
 }
 
-void	exit_game(struct s_game *game)
+int	exit_game(struct s_game *game)
 {
 	size_t	i;
 
@@ -53,4 +53,5 @@ void	exit_game(struct s_game *game)
 	free(game->map);
 	free(game);
 	exit(0);
+	return (0);
 }

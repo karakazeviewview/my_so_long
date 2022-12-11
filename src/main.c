@@ -6,11 +6,12 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 19:59:02 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 11:51:12 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 21:43:57 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "42_libft/include/libft.h"
 
 struct s_game	*init_value(void)
 {
@@ -49,11 +50,16 @@ int	main(int argc, char **argv)
 	if (!game->mlx_ptr)
 		put_err("malloc error\n");
 	game->map = input_map(file_name);
+	if (game->map == NULL)
+		exit (1);
+	else if (*game->map == NULL)
+		exit (1);
 	load_map(game);
 	all_err_check(game);
 	init_game(game);
 	display_img(game);
 	mlx_key_hook(game->win_ptr, input_key, game);
+	mlx_hook(game->win_ptr, 17, 1 << 17, exit_game, game);
 	mlx_loop_hook(game->mlx_ptr, update_game, game);
 	mlx_loop(game->mlx_ptr);
 	return (0);

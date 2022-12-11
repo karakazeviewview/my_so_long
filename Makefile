@@ -1,7 +1,8 @@
 
 NAME		=	so_long
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+# CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 
 SRCS		=	src/calc.c				\
 				src/display.c   		\
@@ -11,7 +12,8 @@ SRCS		=	src/calc.c				\
 				src/init.c				\
 				src/input.c				\
 				src/main.c				\
-				src/utils.c
+				src/utils.c				\
+				src/utils2.c			
 
 OBJS		=	$(SRCS:%.c=$(OBJDIR)/%.o)
 
@@ -33,7 +35,8 @@ all:	$(NAME)
 
 $(NAME):	$(OBJS)
 			@make -C $(MLXDIR)
-			$(CC) $(OBJS) $(CFLAGS) $(MLXFLAGS) -o $(NAME)
+			$(CC) $(OBJS) $(CFLAGS) $(MLXFLAGS) src/42_libft/libft.a -o $(NAME)
+			install_name_tool -change libmlx.dylib $(MLXDIR)/libmlx.dylib $(NAME)
 
 $(OBJDIR)/%.o:%.c
 			@mkdir -p $(@D)
@@ -87,15 +90,15 @@ play: all
 
 dev: all
 	@for emap in ${ERROR_MAPS} ; do \
-	# cat $$emap ; echo "\n" ; \
-	./${NAME} $$emap ; done
+	cat $$emap ; echo "\n" ; \
+	./${NAME} $$emap || true ; done
 	@echo "----finish----"
 
 yshimoda: all
 	@for emap in ${ERROR_MAP_SRCS_yshimoda} ; do \
-	# cat $$emap ; echo "\n" ; \
-	echo $$emap; \
-	./${NAME} $$emap ; done
+	cat $$emap ; echo "\n" ; \
+	echo $$emap ; \
+	./${NAME} $$emap || true ; done
 	@echo "----finish----"
 
 clean:

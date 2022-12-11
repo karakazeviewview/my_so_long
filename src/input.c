@@ -6,11 +6,12 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:05:06 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 11:16:34 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 21:39:54 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "42_libft/include/libft.h"
 
 int	input_key(int key_code, struct s_game *game)
 {
@@ -38,7 +39,9 @@ char	**input_map(char *file_name)
 	i = 0;
 	while (i < 34)
 	{
-		map[i] = mini_get_next_line(fd);
+		map[i] = get_next_line(fd);
+		if (map[i] == NULL)
+			break ;
 		i++;
 	}
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 11:51:54 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 21:29:11 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # define IMG_FLOOR "img/floor.xpm"
 # define IMG_COLLECTION "img/collection.xpm"
 # define IMG_EXIT "img/exit.xpm"
+# define BUFFER_SIZE 1000
 
 struct s_img
 {
@@ -80,29 +81,29 @@ struct s_game
 	struct s_img	img;
 };
 
-void	all_err_check(struct s_game *game);
-bool	check_collision(struct s_game *game,
-			int player_next_y, int player_next_x);
-char	**cpy_map(struct s_game *game);
-bool	check_p_e_c(char **map);
-void	display_floor(struct s_game *game);
-void	display_grid(struct s_game *game, int x, int y, char tile);
-void	display_img(struct s_game *game);
-int		display_player(struct s_game *game);
-int		esc_game(struct s_game *game);
-void	exit_game(struct s_game *game);
-char	*ft_strchr2(const char *s, int c);
-size_t	ft_strlen(const char	*str);
-void	ft_write_number(int number);
-void	get_map_size(struct s_game *game);
-void	init_game(struct s_game *game);
-int		input_key(int key_code, struct s_game *game);
-char	**input_map(char *file_name);
-void	load_map(struct s_game *game);
-char	*mini_get_next_line(int fd);
-int		move_player(struct s_game *game);
-void	put_err(const char *str);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		update_game(struct s_game *game);
+void		all_err_check(struct s_game *game);
+bool		check_collision(struct s_game *game,
+				int player_next_y, int player_next_x);
+char		**cpy_map(struct s_game *game);
+bool		check_p_e_c(char **map);
+void		display_floor(struct s_game *game);
+void		display_grid(struct s_game *game, int x, int y, char tile);
+void		display_img(struct s_game *game);
+int			display_player(struct s_game *game);
+int			esc_game(struct s_game *game);
+int			exit_game(struct s_game *game);
+char		*ft_strchr2(const char *s, int c);
+// size_t		ft_strlen(const char	*str);
+void		ft_write_number(int number);
+void		get_map_size(struct s_game *game);
+void		init_game(struct s_game *game);
+int			input_key(int key_code, struct s_game *game);
+char		**input_map(char *file_name);
+void		load_map(struct s_game *game);
+//char		*mini_get_next_line(int fd);
+int			move_player(struct s_game *game);
+void		put_err(const char *str);
+// int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			update_game(struct s_game *game);
 
 #endif

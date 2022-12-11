@@ -6,7 +6,7 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 22:54:36 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 11:52:26 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 21:45:43 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,6 @@ void	ft_write_number(int number)
 	write (1, &str[number % 10], 1);
 }
 
-size_t	ft_strlen(const char	*str)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len] != '\0')
-	{
-		len++;
-	}
-	return (len);
-}
-
 char	**cpy_map(struct s_game *game)
 {
 	char	**map;
@@ -62,13 +50,13 @@ char	**cpy_map(struct s_game *game)
 	if (!res)
 		perror("malloc Error");
 	i = 0;
-	while (i < game->map_height)
+	while (map[i] && i < game->map_height)
 	{
 		j = 0;
 		res[i] = malloc(sizeof(char) * game->map_width);
 		if (!res[i])
 			perror("malloc Error");
-		while (j < game->map_width)
+		while (map[i][j] && j < game->map_width)
 		{
 			res[i][j] = map[i][j];
 			j++;
@@ -76,18 +64,4 @@ char	**cpy_map(struct s_game *game)
 		i++;
 	}
 	return (res);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (s1[i] != s2[i] || !s1[i] || !s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
 }

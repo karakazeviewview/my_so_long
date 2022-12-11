@@ -6,12 +6,13 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:04:57 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 00:42:07 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 17:45:30 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
 char	*mini_get_next_line(int fd)
 {
 	int		i;
@@ -19,7 +20,10 @@ char	*mini_get_next_line(int fd)
 	char	character;
 	char	*buffer;
 
-	buffer = malloc(10000);
+	//buffer = malloc(10000);
+	buffer = malloc(sizeof(char) * 10000);
+	if (buffer == NULL)
+		return (NULL);
 	rd = 0;
 	i = 0;
 	rd = read(fd, &character, 1);
@@ -31,6 +35,7 @@ char	*mini_get_next_line(int fd)
 		rd = read(fd, &character, 1);
 	}
 	if ((!buffer[i - 1] && !rd) || rd == -1)
+	//if ((buffer[i - 1] != '\0' && !rd) || rd == -1)
 	{
 		free(buffer);
 		return (NULL);
@@ -38,6 +43,7 @@ char	*mini_get_next_line(int fd)
 	buffer[i] = '\0';
 	return (buffer);
 }
+*/
 
 bool	check_collision(struct s_game *game,
 		int player_next_y, int player_next_x)

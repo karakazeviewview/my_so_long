@@ -6,11 +6,12 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 00:14:07 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 11:49:50 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 20:01:35 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "42_libft/include/libft.h"
 
 void	check_if_rectangle(struct s_game *game)
 {

@@ -6,11 +6,12 @@
 /*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:16:42 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 13:53:48 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/11 20:02:03 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "42_libft/include/libft.h"
 
 void	put_err(const char *str)
 {
