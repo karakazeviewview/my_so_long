@@ -13,7 +13,8 @@ SRCS		=	src/calc.c				\
 				src/input.c				\
 				src/main.c				\
 				src/utils.c				\
-				src/utils2.c			
+				src/utils2.c			\
+				src/check_file_name.c
 
 OBJS		=	$(SRCS:%.c=$(OBJDIR)/%.o)
 

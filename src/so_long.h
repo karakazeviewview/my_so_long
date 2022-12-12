@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: event <event@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:06:04 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/12/11 21:29:11 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/12/12 22:14:17 by event            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ struct s_game
 	struct s_img	img;
 };
 
+char		*check_file_name(char *arg);
 void		all_err_check(struct s_game *game);
 bool		check_collision(struct s_game *game,
 				int player_next_y, int player_next_x);

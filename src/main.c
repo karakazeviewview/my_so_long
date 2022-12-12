@@ -40,11 +40,8 @@ int	main(int argc, char **argv)
 	struct s_game	*game;
 
 	if (argc != 2)
-		put_err("no arg\n");
-	if (ft_strlen(argv[1]) < 4 || ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, \
-	".ber", 4))
-		put_err("name error\n");
-	file_name = argv[1];
+		put_err("invalid arg\n");
+	file_name = check_file_name(argv[1]);
 	game = init_value();
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
