@@ -23,4 +23,3 @@ char	*check_file_name(char *arg)
 	file_name = arg;
 	return (file_name);
 }
-git
