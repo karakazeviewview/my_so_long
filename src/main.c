@@ -20,7 +20,7 @@ struct s_game	*init_value(void)
 	g = malloc(sizeof(struct s_game));
 	if (!g)
 		put_err("malloc error\n");
-	g->step_count = 0;
+	g->step_count = 1;
 	g->map_height = 0;
 	g->map_width = 0;
 	g->player_y = 0;
